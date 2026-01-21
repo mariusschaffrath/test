@@ -1,0 +1,69 @@
+:host {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* halbtransparent + Blur über Spiel */
+  background: rgba(15, 17, 20, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Karte in der Mitte */
+.screen.screen-paused {
+  min-width: 360px;
+  padding: 20px 32px 24px;
+  background-color: #262a30;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 138, 31, 0.6);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Titel */
+.screen-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #ff8a1f;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Buttons vertikal untereinander */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* große Buttons wie im Startscreen, evtl. etwas kleiner */
+.menu-btn {
+  min-width: 240px;
+  height: 48px;
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: 2px solid #ff8a1f;
+  background-color: #2a3036;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.menu-btn:hover {
+  background-color: #ff8a1f;
+  color: #1f2327;
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(255, 140, 0, 0.7);
+}

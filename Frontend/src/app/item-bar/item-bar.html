@@ -1,0 +1,10 @@
+<div class="item-bar">
+  <div class="item-slot" *ngFor="let item of items">
+    <div class="item-slot-icon">
+      <img [src]="item.icon" [alt]="item.label" />
+    </div>
+    <div class="item-slot-label">
+      {{ item.label }}
+    </div>
+  </div>
+</div>

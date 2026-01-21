@@ -1,0 +1,15 @@
+<div class="screen screen-paused">
+  <h2 class="screen-title">Pause</h2>
+
+  <ul class="menu-list">
+    <li>
+      <button class="menu-btn" (click)="resume.emit()">Continue</button>
+    </li>
+    <li>
+      <button class="menu-btn" (click)="restart.emit()">Restart</button>
+    </li>
+    <li>
+      <button class="menu-btn" (click)="backToMenu.emit()">Back to Menu</button>
+    </li>
+  </ul>
+</div>

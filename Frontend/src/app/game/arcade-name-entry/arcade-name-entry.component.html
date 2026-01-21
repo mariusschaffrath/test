@@ -1,0 +1,57 @@
+<div class="arcade-name-entry">
+  <div class="name-entry-container">
+    <h3 class="name-entry-title">Enter Your Name</h3>
+    
+    <div class="character-slots">
+      <div 
+        *ngFor="let position of charPositions; let i = index"
+        class="character-slot"
+        [class.active]="currentSlot === i"
+        (click)="onSlotClick(i)"
+      >
+        <!-- Up arrow -->
+        <button 
+          class="scroll-button scroll-up"
+          (click)="onCharScroll(i, -1)"
+          [disabled]="currentSlot !== i"
+        >
+          ▲
+        </button>
+        
+        <!-- Character display -->
+        <div class="character-display">
+          {{ characters[position] }}
+        </div>
+        
+        <!-- Down arrow -->
+        <button 
+          class="scroll-button scroll-down"
+          (click)="onCharScroll(i, 1)"
+          [disabled]="currentSlot !== i"
+        >
+          ▼
+        </button>
+        
+        <!-- Slot indicator -->
+        <div class="slot-indicator" [class.active]="currentSlot === i"></div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+      <p class="instruction-line">Use ← → to move between slots</p>
+      <p class="instruction-line">Use ↑ ↓ to scroll letters</p>
+      <p class="instruction-line">Press ENTER to confirm</p>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-buttons">
+      <button class="action-btn confirm-btn" (click)="confirmName()">
+        Confirm Name
+      </button>
+      <button class="action-btn cancel-btn" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

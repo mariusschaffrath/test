@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.item-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
+}
+
+/* Einzelner „Button“ wie auf deinem Screenshot */
+.item-slot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+
+  background-color: #252a30;      /* dunkles Grau innen */
+  border: 1px solid #ff8a1f;      /* dünner oranger Rand */
+  border-radius: 3px;
+
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Icon links im Button */
+.item-slot-icon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* Text rechts vom Icon */
+.item-slot-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #f5f5f5;
+  white-space: nowrap;
+}

@@ -1,0 +1,121 @@
+/* Overlay über Monitor-Frame */
+.help-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+
+/* Hauptpanel */
+.help-panel {
+  width: 100%;
+  height: 100%;
+  background: #22272b;
+  border: 2px solid #ff8a1f;
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Überschriften */
+h2 {
+  text-align: center;
+  color: #ff8a1f;
+  letter-spacing: 0.15em;
+}
+
+h3 {
+  color: #ff8a1f;
+  margin-bottom: 6px;
+}
+
+h4 {
+  color: #ff8a1f;
+  margin-bottom: 6px;
+}
+
+/* ───── Steuerung ───── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.controls-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* links / rechts */
+  gap: 18px;                        /* Abstand zwischen den 2 Spalten */
+}
+
+.controls-col{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.control-row img {
+  width: 50px;
+  height: auto;
+}
+
+/* ───── Items ───── */
+.items {
+  size: 0.8; /* nimmt verfügbaren Platz */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔑 3 Spalten Grid */
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+/* Item Card */
+.item-card {
+  height: 44px;              /* einheitlich, flacher */
+  padding: 6px 10px;         /* weniger padding */
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid #ff8a1f;
+  border-radius: 6px;
+  background: #1c1f23;
+  font-size: 17px;
+}
+
+.item-card img {
+  width: 50px;
+  height: auto;
+}
+
+/* Gefahr */
+.item-card.danger {
+  border-color: #ff4444;
+  color: #ff4444;
+}
+
+/* Button */
+.confirm {
+  align-self: center;
+  margin-top: 8px;
+  padding: 10px 26px;
+  font-size: 14px;
+  background: #ff8a1f;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
