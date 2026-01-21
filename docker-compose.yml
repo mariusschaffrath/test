@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # --- BACKEND (C# API) ---
+  backend:
+    build: 
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: game-backend
+    restart: always
+    ports:
+      - "5089:5089"
+    environment:
+      - ASPNETCORE_URLS=http://+:5089
+      # Connection String für SQLite im Container anpassen (Ordner /app/data)
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/autoscroller.db
+    volumes:
+      # Damit die Highscores nach Neustart erhalten bleiben:
+      - ./backend-data:/app/data
+
+  # --- FRONTEND (Angular + NGINX) ---
+  frontend:
+    build: 
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: game-frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
