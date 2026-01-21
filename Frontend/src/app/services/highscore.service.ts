@@ -21,7 +21,7 @@ export interface HighscoreEntry {
 })
 export class HighscoreService {
   private http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:5089/api/highscores';
+  private readonly apiUrl = '/api/highscores';
 
   /**
    * Get all highscores from the backend
