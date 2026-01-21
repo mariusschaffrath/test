@@ -1,0 +1,6 @@
+@AutoscrollerAPI_HostAddress = http://localhost:5089
+
+GET {{AutoscrollerAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

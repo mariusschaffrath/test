@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "POEgdVOsif8=",
+  "success": true,
+  "projectFilePath": "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj",
+  "expectedPackageFiles": [
+    "/Users/mariusschaffrath/.nuget/packages/microsoft.aspnetcore.openapi/9.0.10/microsoft.aspnetcore.openapi.9.0.10.nupkg.sha512",
+    "/Users/mariusschaffrath/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
