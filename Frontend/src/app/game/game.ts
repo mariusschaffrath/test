@@ -5,9 +5,9 @@ import { StartScreen } from './start-screen/start-screen';
 import { PauseScreen } from './pause-screen/pause-screen';
 import { GameoverScreen } from './gameover-screen/gameover-screen';
 import { ItemBarComponent } from '../item-bar/item-bar';
-import { HighscoreService } from '../services/highscore.service'; // Import Highscore Service
+import { HighscoreService } from '../services/highscore.service'; 
 import { HelpScreen } from './help-screen/help-screen';
-import { Player } from './player'; // Player Import
+import { Player } from './player'; 
 
 // === TYPES ===
 type SpecialItemType = 'heart' | 'slowmotion' | 'scoreBonus' | 'boost' | 'chip' | 'toolbox'| 'scanner' | 'multiplier';
@@ -17,9 +17,9 @@ const SPECIAL_ITEM_IMAGE_MAP: Record<SpecialItemType, string> = {
   toolbox: 'assets/images/Item-Box.PNG',
   scoreBonus: 'assets/images/Item-Batterie.PNG',
   boost: 'assets/images/Item-Antenne.PNG',
-  slowmotion: 'assets/images/Item-Schraube.PNG', // Added missing mapping
+  slowmotion: 'assets/images/Item-Schraube.PNG', 
   scanner: 'assets/images/Item-Scanner.PNG',
-  multiplier: 'assets/images/Item-Timer.PNG', // Added missing mapping
+  multiplier: 'assets/images/Item-Timer.PNG', 
 };
 
 interface SpecialItem {
@@ -33,7 +33,6 @@ interface SpecialItem {
   collected?: boolean;
 }
 
-
 type GameState = 'menu' | 'help' | 'running' | 'paused' | 'gameover';
 
 interface FloatingText {
@@ -42,8 +41,8 @@ interface FloatingText {
   text: string;
   life: number;
   isHeart?: boolean;
-  color?: string; // Added color support
-  isBold?: boolean; // Added bold support
+  color?: string; 
+  isBold?: boolean; 
 }
 
 @Component({
@@ -61,34 +60,27 @@ interface FloatingText {
   styleUrls: ['./game.css'], 
 })
 export class GameComponent implements AfterViewInit, OnDestroy {
-// === GLOBAL TIME SCALE ===
-private hasSeenHelp = false;
+  // === GLOBAL TIME SCALE ===
+  private hasSeenHelp = false;
 
-private worldTimeScale = 1;   // Items, Hazards, Level
-private playerTimeScale = 1;  // Player bleibt normal
-private slowMotionActive = false;
-private slowMotionStart = 0;
-private readonly SLOW_MOTION_DURATION = 6000; // 6 Sekunden
-private readonly SLOW_MOTION_FACTOR = 0.5;    // 50% Speed
+  private worldTimeScale = 1;   
+  private playerTimeScale = 1;  
+  private slowMotionActive = false;
+  private slowMotionStart = 0;
+  private readonly SLOW_MOTION_DURATION = 6000; 
+  private readonly SLOW_MOTION_FACTOR = 0.5;    
 
+  // === HAZARD LANES ===
+  private readonly HAZARD_LANES = [60, 140, 220];
 
-  // === HAZARD LANES (feste sichere Höhen) ===
-private readonly HAZARD_LANES = [60, 140, 220];
+  // === ASSETS FOR NEW RENDERING (Waren vorher vergessen!) ===
+  private sensorAImg = new Image();
+  private sensorBImg = new Image();
+  private sensorCImg = new Image();
+  private hazardGroundImg = new Image(); 
+  private hazardCeilingImg = new Image(); 
+  private assetLoaded = false;
 
-  private spawnFloatingText(
-  x: number,
-  y: number,
-  text: string,
-  isHeart: boolean = false
-): void {
-  this.floatingTexts.push({
-    x,
-    y,
-    text,
-    life: 60,
-    isHeart
-  });
-}
   floatingTexts: FloatingText[] = [];
 
   // === CONFIG ===
@@ -105,7 +97,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
 
   // === SERVICES & STATE ===
   private level = inject(Level);
-  private highscoreService = inject(HighscoreService); // Inject Highscore Service
+  private highscoreService = inject(HighscoreService); 
   
   showDebugHitbox: boolean = false;
   isCollisionActive: boolean = true;
@@ -130,7 +122,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
   private readonly SCANNER_DURATION = 10000; 
 
   // === DATA FOR HTML ===
-  highScores: number[] = []; // Changed to empty initially
+  highScores: number[] = []; 
   xTimes: string[]  = []; 
 
   // === SPECIAL ITEMS ===
@@ -192,7 +184,6 @@ private readonly HAZARD_LANES = [60, 140, 220];
     // PLAYER INIT
     this.player = new Player(50, this.CANVAS_HEIGHT - 60, this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
     
-
     // Load Highscores
     this.loadHighscores();
 
@@ -206,11 +197,11 @@ private readonly HAZARD_LANES = [60, 140, 220];
   }
 
   // =========================================================
-  // PRELOAD IMAGES (NEW)
+  // PRELOAD IMAGES
   // =========================================================
   private preloadImages() {
     const assets = [
-      { img: this.sensorAImg, src: '/assets/images/sensor_a.png' }, // Ensure these files exist!
+      { img: this.sensorAImg, src: '/assets/images/sensor_a.png' }, 
       { img: this.sensorBImg, src: '/assets/images/sensor_b.png' },
       { img: this.sensorCImg, src: '/assets/images/sensor_c.png' },
       { img: this.hazardGroundImg, src: '/assets/images/hazard_boden.png' },
@@ -256,7 +247,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
       }
     }
 
-    // INPUT (NEW: GAMEPAD SUPPORT)
+    // INPUT (KEYBOARD + GAMEPAD)
     this.handleInput();
 
     // PLAYER
@@ -290,7 +281,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
     // COLLISIONS
     this.checkSpecialItemCollisions();
     this.checkHazardCollisions();
-    this.checkItemCollisions(); // Check for Sensor Items (Level Items)
+    this.checkItemCollisions(); 
 
     // RENDER
     this.render();
@@ -301,7 +292,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
   };
 
   // =========================================================
-  // INPUT HANDLING (NEW)
+  // INPUT HANDLING
   // =========================================================
   private handleInput(): void {
     const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
@@ -314,7 +305,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
     if (gp) {
         if (gp.axes[0] < -0.5) joystickLeft = true;
         if (gp.axes[0] > 0.5) joystickRight = true;
-        for (let i = 0; i < 16; i++) { // Check all standard buttons
+        for (let i = 0; i < 16; i++) { 
             if (gp.buttons[i] && gp.buttons[i].pressed) {
                 jumpButton = true;
                 break;
@@ -343,7 +334,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
   }
 
   // =========================================================
-  // RENDER (UPDATED)
+  // RENDER
   // =========================================================
 
   private render(): void {
@@ -351,7 +342,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
 
     this.ctx.clearRect(0, 0, this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
 
-    // 1. HAZARDS (NEW GLOWING RENDERER)
+    // 1. HAZARDS (GLOWING)
     const hazards = this.level.getHazards();
     for (const h of hazards) { 
         this.drawHazardImage(this.ctx, h); 
@@ -360,7 +351,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
     // 2. LEVEL PLATFORMS
     this.level.draw(this.ctx);
 
-    // 3. LEVEL ITEMS (SENSORS - NEW RENDERER)
+    // 3. LEVEL ITEMS (SENSORS)
     const sensors = this.level.getItems();
     sensors.forEach(item => {
       if (item.collected) return; 
@@ -377,12 +368,12 @@ private readonly HAZARD_LANES = [60, 140, 220];
        this.drawDebugInfo();
     }
 
-    // 6. FLOATING TEXTS (UPDATED)
+    // 6. FLOATING TEXTS
     this.drawFloatingTexts(this.ctx);
   }
 
   // =========================================================
-  // NEW RENDERING METHODS
+  // RENDERING METHODS
   // =========================================================
 
   private drawHazardImage(ctx: CanvasRenderingContext2D, h: any) {
@@ -391,7 +382,6 @@ private readonly HAZARD_LANES = [60, 140, 220];
       const overlap = 8; 
       let drawY = h.y;
       
-      // Determine type based on your logic (assuming 'cord' is ceiling)
       if (h.type === 'cord') { 
           img = this.hazardCeilingImg; 
           drawY = h.y - overlap; 
@@ -404,14 +394,12 @@ private readonly HAZARD_LANES = [60, 140, 220];
           ctx.save(); 
           ctx.shadowColor = '#FF0000'; 
           ctx.shadowBlur = 30; 
-          ctx.globalCompositeOperation = 'lighter'; // GLOW EFFECT
-          // Draw multiple times for stronger glow
+          ctx.globalCompositeOperation = 'lighter'; 
           for(let i = 0; i < 3; i++) {
               this.drawImageProp(ctx, img, h.x, drawY, h.width, h.height, 5.5, h.type === 'cord' ? 'top' : 'bottom');
           }
           ctx.restore(); 
       } else {
-          // Fallback if image not loaded
            ctx.fillStyle = h.color;
            ctx.fillRect(h.x, h.y, h.width, h.height);
       }
@@ -433,7 +421,6 @@ private readonly HAZARD_LANES = [60, 140, 220];
             this.drawImageProp(ctx, img, item.x, item.y, item.width, item.height, 2.0, 'bottom');
             ctx.restore();
             
-            // Draw normal on top to keep definition
             ctx.save();
             ctx.shadowColor = 'transparent'; 
             ctx.globalCompositeOperation = 'source-over'; 
@@ -453,7 +440,6 @@ private readonly HAZARD_LANES = [60, 140, 220];
     ctx.restore();
   }
 
-  // Helper for Aspect Ratio Correct Scaling
   private drawImageProp(ctx: CanvasRenderingContext2D, img: HTMLImageElement, x: number, y: number, w: number, h: number, scale: number, align: string) {
       const imgRatio = img.naturalWidth / img.naturalHeight;
       const targetRatio = w / h;
@@ -479,36 +465,20 @@ private readonly HAZARD_LANES = [60, 140, 220];
       ctx.drawImage(img, Math.floor(x + oX), Math.floor(y + oY), Math.floor(finalW), Math.floor(finalH));
   }
 
-  private drawFloatingTexts(ctx: CanvasRenderingContext2D) {
-    ctx.save();
-    this.floatingTexts.forEach(t => {
-      ctx.globalAlpha = Math.max(0, t.life / 60); 
-      ctx.fillStyle = t.color || '#FFA500';
-      ctx.font = t.isBold ? 'bold 24px Arial' : 'bold 16px Arial'; // Adjusted sizes
-      ctx.fillText(t.text, t.x, t.y);
-    });
-    ctx.restore();
-  }
-
   // =========================================================
-  // KOLLISIONEN (UPDATED)
+  // KOLLISIONEN
   // =========================================================
   
-  // NEW: Check for Level Items (Sensors)
   private checkItemCollisions(): void {
     this.level.getItems().forEach(item => {
       if (!item.collected && this.checkRectCollision(this.player, item)) {
         item.collected = true;
         this.playItemSound();
         
-        // Calculate points based on type
         let pointsToAdd = 10;
         if (item.type === 'sensor-b') pointsToAdd = 25;
         if (item.type === 'sensor-c') pointsToAdd = 50;
         
-        // Apply Multipliers if active (example: Boost)
-        // Note: You might want to re-integrate the scoreMultiplier logic from the other file if you want Boost to affect sensors too.
-        // For now, simple addition:
         this.addScore(pointsToAdd);
         this.spawnFloatingText(item.x, item.y, `+${pointsToAdd}`, '#00FFFF', false);
       }
@@ -536,7 +506,6 @@ private readonly HAZARD_LANES = [60, 140, 220];
 
     const hazards = this.level.getHazards();
     for (const h of hazards) {
-      // Use simpler collision for hazards, maybe with padding
        if (this.checkRectCollision(this.player, h, 3)) {
           this.applyDamage(); 
           break;
@@ -674,22 +643,17 @@ private readonly HAZARD_LANES = [60, 140, 220];
   }
   
   onHelpConfirmed() {
-  this.hasSeenHelp = true;
-  this.startGame(true);
+    this.hasSeenHelp = true;
+    this.startGame(true);
   }
-
 
   starthelper() {
-  // Wird NUR vom Menü ("Start Game") geklickt
-  if (!this.hasSeenHelp) {
-    this.gameState = 'help';
-    return;
+    if (!this.hasSeenHelp) {
+      this.gameState = 'help';
+      return;
+    }
+    this.startGame(true);
   }
-
-  // Hilfe schon gesehen -> direkt starten
-  this.startGame(true);
-  }
-
 
   startGame(fromMenu: boolean = false) {
     this.gameState = 'running';
@@ -745,7 +709,6 @@ private readonly HAZARD_LANES = [60, 140, 220];
   }
   
   private spawnRandomSpecialItem(): void {
-    // Basic spawning logic from your original file
     const lanes = [50, 140, 230]; 
     const laneY = lanes[Math.floor(Math.random() * lanes.length)]; 
     const startX = this.CANVAS_WIDTH + 50; 
@@ -812,7 +775,7 @@ private readonly HAZARD_LANES = [60, 140, 220];
   // Method called by Gameover Screen to save score
   saveScore(playerName: string) {
       this.highscoreService.addHighscore(playerName, this.score).subscribe(() => {
-          this.loadHighscores(); // Reload to update list
+          this.loadHighscores(); 
       });
   }
 
@@ -832,5 +795,4 @@ private readonly HAZARD_LANES = [60, 140, 220];
       }
       this.ctx.restore(); 
   }
-
 }
