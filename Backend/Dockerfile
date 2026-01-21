@@ -10,6 +10,9 @@ RUN dotnet restore "AutoscrollerAPI/AutoscrollerAPI.csproj"
 COPY . .
 WORKDIR "/src/AutoscrollerAPI"
 
+# 👇 NEUE ZEILE: Erzwinge Restore nach dem Kopieren, um Fehler zu beheben
+RUN dotnet restore "AutoscrollerAPI.csproj" --force
+
 # Baue die Anwendung (Release Modus)
 RUN dotnet publish "AutoscrollerAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
