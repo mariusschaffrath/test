@@ -1,54 +1,50 @@
-<div class="screen screen-gameover">
+<div class="screen screen-gameover" [attr.score-saved]="scoreSaved ? true : null">
   <h2 class="screen-title">Game Over</h2>
+  <p class="screen-score">Your Score: {{ score.toString().padStart(4, '0') }}</p>
 
-  <p class="screen-score">Dein Score: {{ score.toString().padStart(4, '0') }}</p>
-
-  <!-- Save Score Section with Arcade Name Entry -->
+  <!-- Name Entry Section: Only visible until score is saved -->
   <div class="save-score-section" *ngIf="!scoreSaved">
     <h3 class="save-score-title">Save Your Score</h3>
-    
-    <!-- Embedded Arcade Name Entry -->
     <div class="arcade-name-entry-embedded" *ngIf="showNameEntry">
       <app-arcade-name-entry
         [initialName]="playerName"
         (nameConfirmed)="onNameConfirmed($event)"
-        (cancelled)="onNameEntryCancelled()">
+        (cancelled)="onNameEntryCancelled()"
+      >
       </app-arcade-name-entry>
     </div>
-    
-    <!-- Show button when not entering name -->
-    <div class="save-score-form" *ngIf="!showNameEntry">
-      <button 
-        class="arcade-entry-btn" 
-        (click)="showArcadeNameEntry()"
-        [disabled]="isSaving"
-      >
-        Enter Name ({{ playerName }})
-      </button>
-    </div>
-    
     <div class="save-messages">
       <p class="save-error" *ngIf="saveError">Failed to save score. Please try again.</p>
       <p class="save-success" *ngIf="saveSuccess">Score saved successfully!</p>
     </div>
   </div>
 
+  <!-- Score Saved Message -->
   <div class="score-saved-message" *ngIf="scoreSaved">
     <p class="save-success">✓ Your score has been saved as {{ playerName }}!</p>
   </div>
 
-  <h3 class="screen-subtitle">
-    Leaderboard 
-    <button class="refresh-btn" (click)="refreshLeaderboard()" title="Refresh leaderboard" aria-label="Refresh leaderboard" type="button">↻</button>
+  <!-- Leaderboard and Menu: Only visible after score is saved -->
+  <h3 class="screen-subtitle" *ngIf="scoreSaved">
+    Leaderboard
+    <button
+      class="refresh-btn"
+      (click)="refreshLeaderboard()"
+      title="Refresh leaderboard"
+      aria-label="Refresh leaderboard"
+      type="button"
+    >
+      ↻
+    </button>
   </h3>
-  <div class="highscore-container">
+  <div class="highscore-container" *ngIf="scoreSaved">
     <div *ngIf="isLoading" class="highscore-loading">Loading scores...</div>
     <div *ngIf="hasError" class="highscore-error">
       <p>Could not load online scores. Please check your connection.</p>
     </div>
     <ul class="highscore-list" *ngIf="!isLoading && !hasError && highscoreEntries.length > 0">
       <li *ngFor="let entry of highscoreEntries; let i = index" class="highscore-entry">
-        <span class="rank">{{i + 1}}.</span>
+        <span class="rank">{{ i + 1 }}.</span>
         <span class="player-name">{{ entry.playerName }}</span>
         <span class="score">{{ entry.score.toString().padStart(4, '0') }}</span>
       </li>
@@ -58,7 +54,7 @@
     </div>
   </div>
 
-  <ul class="menu-list">
+  <ul class="menu-list" *ngIf="scoreSaved">
     <li>
       <button class="menu-btn" (click)="restart.emit()">Restart</button>
     </li>

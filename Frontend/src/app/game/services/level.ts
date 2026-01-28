@@ -9,6 +9,8 @@ import { Item, ItemType } from '../models/item';
   providedIn: 'root'
 })
 export class Level {
+
+
   // === State ===
   private platforms: Platform[] = [];
   private hazards: Hazard[] = [];
@@ -116,7 +118,8 @@ export class Level {
   this.totalFrames++;
 
   // 🔥 ZENTRALE ZEIT-SKALIERUNG
-  const moveStep = this.gameSpeed;
+const moveStep = this.gameSpeed * timeScale;
+
 
   this.platforms.forEach(p => p.x -= moveStep);
   this.hazards.forEach(h => h.x -= moveStep);
@@ -396,6 +399,41 @@ export class Level {
     });
   }
 
+private isAreaBlocked(
+  x: number,
+  y: number,
+  w: number,
+  height: number
+): boolean {
+
+  // ❌ Plattformen
+  if (this.platforms.some(p =>
+    x < p.x + p.width &&
+    x + w > p.x &&
+    y < p.y + p.height &&
+    y + height > p.y
+  )) return true;
+
+  // ❌ Hazards
+  if (this.hazards.some(hz =>
+    x < hz.x + hz.width &&
+    x + w > hz.x &&
+    y < hz.y + hz.height &&
+    y + height > hz.y
+  )) return true;
+
+  // ❌ Items
+  if (this.items.some(i =>
+    x < i.x + i.width &&
+    x + w > i.x &&
+    y < i.y + i.height &&
+    y + height > i.y
+  )) return true;
+
+  return false;
+}
+
+
   private isOverheadClearGrid(tX: number, sX: number, aP: PlatformDef[]): boolean {
       const rX = tX - sX;
       for (const p of aP) {
@@ -425,13 +463,44 @@ export class Level {
     this.hazards.push(hazard);
     return hazard;
   }
-  
-  private createItem(x: number, y: number, type: ItemType): void {
-      let points = 10; let color = '#4299E1'; let w = 20; let h = 20;
-      if (type === 'sensor-b') { points = 50; color = '#48BB78'; w=25; h=25; } 
-      if (type === 'sensor-c') { points = 100; color = '#ECC94B'; w=30; h=30; } 
-      this.items.push({ id: this.nextId++, x, y, width: w, height: h, type, points, color, collected: false });
+private createItem(x: number, y: number, type: ItemType): void {
+
+  let points = 10;
+  let color = '#4299E1';
+  let w = 20;
+  let h = 20;
+
+  if (type === 'sensor-b') {
+    points = 50;
+    color = '#48BB78';
+    w = 25;
+    h = 25;
   }
+
+  if (type === 'sensor-c') {
+    points = 100;
+    color = '#ECC94B';
+    w = 30;
+    h = 30;
+  }
+
+  // ❌ EIN EINZIGER CHECK
+  if (this.isAreaBlocked(x, y, w, h)) return;
+
+  // ✅ Item erzeugen
+  this.items.push({
+    id: this.nextId++,
+    x,
+    y,
+    width: w,
+    height: h,
+    type,
+    points,
+    color,
+    collected: false
+  });
+}
+
 
   private createDebugPlayerBox(x: number, platformY: number) {
       this.debugPlayerBoxes.push({ x: x, y: platformY - 60, w: 40, h: 60 });

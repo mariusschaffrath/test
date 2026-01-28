@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 /**
  * Interface matching the backend HighscoreEntry model
@@ -14,14 +15,14 @@ export interface HighscoreEntry {
 
 /**
  * Service for managing highscores via the backend API
- * Backend API must be running on http://localhost:5089
+ * Supports Docker deployment (proxy) and Raspberry Pi deployment (direct)
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HighscoreService {
   private http = inject(HttpClient);
-  private readonly apiUrl = '/api/highscores';
+  private readonly apiUrl = `${environment.apiUrl}/highscores`;
 
   /**
    * Get all highscores from the backend
@@ -37,9 +38,9 @@ export class HighscoreService {
    * @param score - Score achieved (0 to 2,147,483,647)
    */
   addHighscore(playerName: string, score: number): Observable<HighscoreEntry> {
-    return this.http.post<HighscoreEntry>(this.apiUrl, { 
-      playerName, 
-      score 
+    return this.http.post<HighscoreEntry>(this.apiUrl, {
+      playerName,
+      score,
     });
   }
 

@@ -25,7 +25,7 @@ export class Player {
   
   // Bewegungskonstanten
   moveSpeed: number = 5;
-  jumpPower: number = 16;
+  jumpPower: number = 14;
   gravity: number = 0.6;      
   maxFallSpeed: number = 14;  
   
@@ -48,7 +48,7 @@ export class Player {
 
     // 👇 WICHTIG: Hier laden wir das Bild direkt!
     // Achte genau auf die Endung (.png oder .PNG) wie sie in deinem Ordner ist
-    this.image.src = 'assets/images/player.png'; 
+    this.image.src = 'assets/images/player.PNG'; 
   }
 
   // Die Methode setImage brauchen wir nicht mehr, da der Player es selbst macht.

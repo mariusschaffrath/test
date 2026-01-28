@@ -79,7 +79,7 @@ h4 {
 /* 🔑 3 Spalten Grid */
 .item-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 2px;
 }
 
@@ -93,7 +93,7 @@ h4 {
   border: 1px solid #ff8a1f;
   border-radius: 6px;
   background: #1c1f23;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .item-card img {

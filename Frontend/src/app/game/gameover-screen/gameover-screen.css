@@ -11,8 +11,10 @@
 }
 
 .screen.screen-gameover {
-  min-width: 380px;
-  padding: 22px 36px 26px;
+  /* min-width removed to prevent forced horizontal scroll */
+  max-width: 85vw;
+  max-height: 60vh;
+  padding: 16px 24px 20px;
   background-color: #262a30;
   border-radius: 6px;
   border: 1px solid rgba(255, 138, 31, 0.6);
@@ -20,6 +22,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* GAME OVER Titel */
@@ -47,6 +51,9 @@
   background: rgba(21, 24, 28, 0.7);
   border-radius: 6px;
   border: 1px solid rgba(255, 138, 31, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Embedded Arcade Name Entry */
@@ -163,7 +170,9 @@
   font-size: 16px;
   text-align: center;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .player-name-input:focus {
@@ -193,7 +202,10 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    opacity 0.2s ease;
 }
 
 .save-btn:hover:not(:disabled) {
@@ -241,6 +253,18 @@
   border: 1px solid #28a745;
 }
 
+/* Hide leaderboard and menu until score is saved */
+.screen-gameover .screen-subtitle,
+.screen-gameover .highscore-container,
+.screen-gameover .menu-list {
+  display: none;
+}
+.screen-gameover[score-saved] .screen-subtitle,
+.screen-gameover[score-saved] .highscore-container,
+.screen-gameover[score-saved] .menu-list {
+  display: block;
+}
+
 /* Highscore-Überschrift */
 .screen-subtitle {
   font-size: 16px;
@@ -280,7 +304,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 4px 12px;
-  min-width: 200px;
+  /* min-width removed to prevent forced horizontal scroll */
   background: rgba(21, 24, 28, 0.85);
   border-radius: 4px;
   border: 1px solid rgba(255, 138, 31, 0.4);
@@ -292,7 +316,7 @@
 }
 
 .highscore-entry:nth-child(2) {
-  background: rgba(192, 192, 192, 0.15); /* Silver */  
+  background: rgba(192, 192, 192, 0.15); /* Silver */
   border-color: #c0c0c0;
 }
 
@@ -322,7 +346,9 @@
 }
 
 /* Loading and error states */
-.highscore-loading, .highscore-error, .no-scores {
+.highscore-loading,
+.highscore-error,
+.no-scores {
   color: #999;
   font-style: italic;
   text-align: center;
@@ -350,7 +376,9 @@
   margin-left: 10px;
   cursor: pointer;
   opacity: 0.7;
-  transition: opacity 0.2s, transform 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
   user-select: none;
   color: #ff8a1f;
   /* Reset button styling */
@@ -389,8 +417,11 @@
   letter-spacing: 0.12em;
   cursor: pointer;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
-  transition: background-color 0.2s ease, color 0.2s ease,
-    transform 0.1s ease, box-shadow 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
 }
 
 .menu-btn:hover {

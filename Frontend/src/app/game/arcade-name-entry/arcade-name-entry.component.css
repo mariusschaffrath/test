@@ -3,10 +3,12 @@
   justify-content: center;
   align-items: center;
   min-height: 400px;
+  max-height: 90vh;
   background: linear-gradient(135deg, #1a1a2e, #16213e);
   color: #ff8a1f;
   font-family: 'Courier New', monospace;
   padding: 20px;
+  overflow: hidden;
 }
 
 .name-entry-container {
@@ -15,7 +17,7 @@
   border: 2px solid #ff8a1f;
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 138, 31, 0.6),
     inset 0 0 20px rgba(255, 138, 31, 0.1);
   animation: glow-pulse 2s ease-in-out infinite alternate;
@@ -102,7 +104,7 @@
 .character-slot.active .character-display {
   background: rgba(255, 138, 31, 0.1);
   transform: scale(1.1);
-  box-shadow: 
+  box-shadow:
     0 0 20px #ff8a1f,
     inset 0 0 10px rgba(255, 138, 31, 0.2);
 }
@@ -180,12 +182,12 @@
 /* Animations */
 @keyframes glow-pulse {
   from {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(255, 138, 31, 0.6),
       inset 0 0 20px rgba(255, 138, 31, 0.1);
   }
   to {
-    box-shadow: 
+    box-shadow:
       0 0 30px rgba(255, 138, 31, 0.8),
       inset 0 0 30px rgba(255, 138, 31, 0.2);
   }
@@ -205,24 +207,24 @@
   .character-slots {
     gap: 10px;
   }
-  
+
   .character-display {
     font-size: 36px;
     min-width: 50px;
     min-height: 50px;
   }
-  
+
   .scroll-button {
     width: 35px;
     height: 25px;
     font-size: 10px;
   }
-  
+
   .action-buttons {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .action-btn {
     width: 100%;
   }

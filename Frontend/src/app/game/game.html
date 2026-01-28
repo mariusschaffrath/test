@@ -47,10 +47,9 @@
 
       <app-start-screen
         *ngIf="gameState === 'menu'"
-        (start)="startGame()"
-        (start)="starthelper()"
-        (twoPlayer)="onTwoPlayer()">
-      </app-start-screen>
+        (start)="startSingleFromMenu()"
+        (twoPlayer)="startTwoPlayerFromMenu()"
+      ></app-start-screen>
 
       <app-help-screen
       *ngIf="gameState === 'help'"
@@ -62,6 +61,9 @@
         <div class="chart-header">
           <div class="chart-hearts">
             <span *ngFor="let _ of getLivesArray()" class="heart-center"></span>
+          </div>
+          <div class="mode-badge" *ngIf="isTwoPlayer">
+          2 PLAYER MODE
           </div>
         </div>
 
@@ -75,7 +77,6 @@
           </div>
 
           <div class="chart-window">
-            <div class="chart-bg"></div>
 
             <!-- CANVAS -->
             <canvas
@@ -111,7 +112,7 @@
         </div>
 
         <div class="x-axis-container">
-          <div class="x-axis">
+          <div class="x-axis" [style.transform]="'translateX(-' + xAxisOffset + 'px)'">
             <div *ngFor="let t of xTimes" class="x-label-wrapper">
               <div class="x-label">{{ t }}</div>
             </div>

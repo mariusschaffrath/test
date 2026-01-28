@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  OnDestroy,
+  inject,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
@@ -30,7 +39,7 @@ export class GameoverScreen implements OnInit, OnDestroy {
 
   // Name input form properties
   playerName: string = 'AAA'; // Default 3-character arcade name
-  showNameEntry: boolean = false; // Controls when to show name entry
+  showNameEntry: boolean = true; // Auto-show name entry immediately for arcade use
   isSaving = false;
   saveError = false;
   saveSuccess = false;
@@ -41,26 +50,28 @@ export class GameoverScreen implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Set up subscription with switchMap to handle automatic cleanup
-    this.highscoreSubscription = this.loadTrigger$.pipe(
-      switchMap(() => {
-        this.isLoading = true;
-        this.hasError = false;
-        return this.highscoreService.getHighscores();
-      })
-    ).subscribe({
-      next: (scores) => {
-        this.highscoreEntries = scores.slice(0, 10); // Top 10 scores
-        this.isLoading = false;
-        this.hasError = false;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
-        console.error('Error loading highscores:', error);
-        this.hasError = true;
-        this.isLoading = false;
-      }
-    });
-    
+    this.highscoreSubscription = this.loadTrigger$
+      .pipe(
+        switchMap(() => {
+          this.isLoading = true;
+          this.hasError = false;
+          return this.highscoreService.getHighscores();
+        }),
+      )
+      .subscribe({
+        next: (scores) => {
+          this.highscoreEntries = scores.slice(0, 10); // Top 10 scores
+          this.isLoading = false;
+          this.hasError = false;
+          this.cdr.detectChanges();
+        },
+        error: (error) => {
+          console.error('Error loading highscores:', error);
+          this.hasError = true;
+          this.isLoading = false;
+        },
+      });
+
     // Initial load
     this.loadHighscores();
     this.startRefreshInterval();
@@ -84,11 +95,11 @@ export class GameoverScreen implements OnInit, OnDestroy {
   }
 
   private clearRefreshInterval() {
-  if (this.refreshInterval !== null) {
-    clearInterval(this.refreshInterval);
-    this.refreshInterval = null;
+    if (this.refreshInterval !== null) {
+      clearInterval(this.refreshInterval);
+      this.refreshInterval = null;
+    }
   }
-}
 
   private handleVisibilityChange() {
     if (document.visibilityState === 'visible') {
@@ -143,22 +154,21 @@ export class GameoverScreen implements OnInit, OnDestroy {
     this.saveError = false;
     this.saveSuccess = false;
 
-    this.highscoreService.addHighscore(this.playerName.trim(), this.score)
-      .subscribe({
-        next: (savedEntry) => {
-          console.log('Score saved successfully:', savedEntry);
-          this.saveSuccess = true;
-          this.scoreSaved = true;
-          this.isSaving = false;
-          // Refresh the leaderboard to show the new score
-          this.loadHighscores();
-        },
-        error: (error) => {
-          console.error('Error saving score:', error);
-          this.saveError = true;
-          this.isSaving = false;
-        }
-      });
+    this.highscoreService.addHighscore(this.playerName.trim(), this.score).subscribe({
+      next: (savedEntry) => {
+        console.log('Score saved successfully:', savedEntry);
+        this.saveSuccess = true;
+        this.scoreSaved = true;
+        this.isSaving = false;
+        // Refresh the leaderboard to show the new score
+        this.loadHighscores();
+      },
+      error: (error) => {
+        console.error('Error saving score:', error);
+        this.saveError = true;
+        this.isSaving = false;
+      },
+    });
   }
 
   /**
