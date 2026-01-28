@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj": {}
+    "/Users/mariusschaffrath/Documents/ProPra_Projekt/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj": {}
   },
   "projects": {
-    "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj": {
+    "/Users/mariusschaffrath/Documents/ProPra_Projekt/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj",
+        "projectUniqueName": "/Users/mariusschaffrath/Documents/ProPra_Projekt/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj",
+        "projectPath": "/Users/mariusschaffrath/Documents/ProPra_Projekt/ProPra_WiSe_25-26_Gruppe_9/Backend/Backend.csproj",
         "packagesPath": "/Users/mariusschaffrath/.nuget/packages/",
-        "outputPath": "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/",
+        "outputPath": "/Users/mariusschaffrath/Documents/ProPra_Projekt/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mariusschaffrath/.nuget/NuGet/NuGet.Config"
@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
             }
           },
           "imports": [

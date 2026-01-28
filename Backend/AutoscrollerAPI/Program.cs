@@ -12,7 +12,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // Adjust the URL to match the frontend URL
+            // Development: Angular dev server
+            // Production: Nginx serving frontend
+            policy.WithOrigins("http://localhost:4200", "http://localhost", "http://127.0.0.1")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
@@ -24,6 +26,21 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AutoscrollerAPI.Data.ApplicationDbContext>();
+        context.Database.EnsureCreated();
+        Console.WriteLine("Datenbank erfolgreich migriert!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Fehler bei der DB-Migration: " + ex.Message);
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -31,7 +48,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Only redirect to HTTPS in production, not in development
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
 app.UseCors("AllowFrontend");
 
 // Enable static files from wwwroot

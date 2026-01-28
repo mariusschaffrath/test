@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tombe\\OneDrive\\Uni Siegen\\WiSe 2526\\Programierpraktikum\\ProPra_Game\\ProPra_WiSe_25-26_Gruppe_9\\Backend\\AutoscrollerAPI\\AutoscrollerAPI.csproj": {}
+    "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/AutoscrollerAPI/AutoscrollerAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tombe\\OneDrive\\Uni Siegen\\WiSe 2526\\Programierpraktikum\\ProPra_Game\\ProPra_WiSe_25-26_Gruppe_9\\Backend\\AutoscrollerAPI\\AutoscrollerAPI.csproj": {
+    "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/AutoscrollerAPI/AutoscrollerAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tombe\\OneDrive\\Uni Siegen\\WiSe 2526\\Programierpraktikum\\ProPra_Game\\ProPra_WiSe_25-26_Gruppe_9\\Backend\\AutoscrollerAPI\\AutoscrollerAPI.csproj",
+        "projectUniqueName": "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/AutoscrollerAPI/AutoscrollerAPI.csproj",
         "projectName": "AutoscrollerAPI",
-        "projectPath": "C:\\Users\\tombe\\OneDrive\\Uni Siegen\\WiSe 2526\\Programierpraktikum\\ProPra_Game\\ProPra_WiSe_25-26_Gruppe_9\\Backend\\AutoscrollerAPI\\AutoscrollerAPI.csproj",
-        "packagesPath": "C:\\Users\\tombe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tombe\\OneDrive\\Uni Siegen\\WiSe 2526\\Programierpraktikum\\ProPra_Game\\ProPra_WiSe_25-26_Gruppe_9\\Backend\\AutoscrollerAPI\\obj\\",
+        "projectPath": "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/AutoscrollerAPI/AutoscrollerAPI.csproj",
+        "packagesPath": "/Users/mariusschaffrath/.nuget/packages/",
+        "outputPath": "/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/AutoscrollerAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\tombe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/mariusschaffrath/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -44,6 +44,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -56,7 +60,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[6.6.2, )"
             }
           },
           "imports": [
@@ -78,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

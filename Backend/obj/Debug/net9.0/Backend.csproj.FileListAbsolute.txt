@@ -1,0 +1,9 @@
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.csproj.AssemblyReference.cache
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/rpswa.dswa.cache.json
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.AssemblyInfoInputs.cache
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.AssemblyInfo.cs
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.csproj.CoreCompileInputs.cache
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.MvcApplicationPartsAssemblyInfo.cs
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.MvcApplicationPartsAssemblyInfo.cache
+/Users/mariusschaffrath/ProPra_WiSe_25-26_Gruppe_9/Backend/obj/Debug/net9.0/Backend.sourcelink.json
