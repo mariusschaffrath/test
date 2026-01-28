@@ -1,0 +1,24 @@
+[Unit]
+Description=Autoscroller Game Backend
+After=network.target
+
+[Service]
+Type=notify
+WorkingDirectory=/opt/autoscroller/Backend/AutoscrollerAPI
+ExecStart=/usr/bin/dotnet /opt/autoscroller/Backend/AutoscrollerAPI/bin/Release/net9.0/AutoscrollerAPI.dll
+Restart=always
+RestartSec=10
+User=arcade
+Group=arcade
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+# Security settings
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/autoscroller
+
+[Install]
+WantedBy=multi-user.target
