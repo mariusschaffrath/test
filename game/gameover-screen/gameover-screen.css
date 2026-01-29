@@ -1,0 +1,505 @@
+.menu-btn-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 48px;
+}
+/* Flex row for leaderboard and menu side by side */
+.gameover-flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.highscore-side {
+  min-width: 320px;
+  max-width: 400px;
+  flex: 1 1 0;
+}
+
+.gameover-flex-row .menu-list {
+  flex-direction: column;
+  gap: 18px;
+  min-width: 220px;
+  align-items: center;
+  margin-top: 48px;
+  justify-content: center;
+}
+
+.menu-list-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-btn {
+  margin: 0.5rem 0;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 16px 2px #ff8a1f99;
+  background-clip: padding-box;
+  border: 2px solid #ff8a1f;
+  background-color: #2a3036;
+  transition:
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+.menu-btn.selected,
+.menu-btn:focus {
+  z-index: 2;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 24px 4px #ff8a1f99;
+  background-color: #ff8a1f !important;
+  color: #1f2327 !important;
+}
+
+:host {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(15, 17, 20, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.screen.screen-gameover {
+  /* min-width removed to prevent forced horizontal scroll */
+  max-width: 85vw;
+  max-height: 60vh;
+  padding: 16px 24px 20px;
+  background-color: #262a30;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 138, 31, 0.6);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* GAME OVER Titel */
+.screen-title {
+  font-size: 30px;
+  margin-bottom: 12px;
+  color: #ff4747;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Score-Anzeige direkt drunter */
+.screen-score {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+/* Save Score Section */
+.save-score-section {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(21, 24, 28, 0.7);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 138, 31, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Embedded Arcade Name Entry */
+.arcade-name-entry-embedded {
+  margin: 16px 0;
+}
+
+.arcade-name-entry-embedded app-arcade-name-entry {
+  display: block;
+}
+
+/* Override arcade name entry styles for embedded version */
+.arcade-name-entry-embedded ::ng-deep .arcade-name-entry {
+  min-height: auto;
+  padding: 10px;
+  background: transparent;
+}
+
+.arcade-name-entry-embedded ::ng-deep .name-entry-container {
+  background: rgba(21, 24, 28, 0.5);
+  border: 1px solid rgba(255, 138, 31, 0.4);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 138, 31, 0.3);
+}
+
+.arcade-name-entry-embedded ::ng-deep .name-entry-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.arcade-name-entry-embedded ::ng-deep .character-slots {
+  margin: 20px 0;
+  gap: 15px;
+}
+
+.arcade-name-entry-embedded ::ng-deep .character-display {
+  font-size: 36px;
+  min-width: 50px;
+  min-height: 50px;
+}
+
+.arcade-name-entry-embedded ::ng-deep .scroll-button {
+  width: 35px;
+  height: 25px;
+  font-size: 10px;
+}
+
+.arcade-name-entry-embedded ::ng-deep .action-buttons {
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.arcade-name-entry-embedded ::ng-deep .action-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Arcade Entry Button */
+.arcade-entry-btn {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid #ff8a1f;
+  border-radius: 8px;
+  background: transparent;
+  color: #ff8a1f;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 5px #ff8a1f;
+  box-shadow: 0 0 10px rgba(255, 138, 31, 0.2);
+}
+
+.arcade-entry-btn:hover:not(:disabled) {
+  background: #ff8a1f;
+  color: #000;
+  box-shadow: 0 0 20px #ff8a1f;
+  transform: translateY(-2px);
+}
+
+.arcade-entry-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.save-score-title {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #ffcf8a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.save-score-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.player-name-input {
+  width: 100%;
+  max-width: 250px;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 138, 31, 0.5);
+  border-radius: 6px;
+  background: rgba(42, 48, 54, 0.9);
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.player-name-input:focus {
+  border-color: #ff8a1f;
+  box-shadow: 0 0 8px rgba(255, 138, 31, 0.3);
+}
+
+.player-name-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.player-name-input::placeholder {
+  color: #999;
+}
+
+.save-btn {
+  min-width: 120px;
+  height: 44px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 2px solid #28a745;
+  background-color: #1e7e34;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    opacity 0.2s ease;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #28a745;
+  transform: translateY(-1px);
+}
+
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.save-btn.saving {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+
+.save-messages {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.save-error {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.save-success {
+  color: #28a745;
+  font-size: 14px;
+  margin: 4px 0;
+  font-weight: 600;
+}
+
+.score-saved-message {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  text-align: center;
+  background: rgba(40, 167, 69, 0.2);
+  border-radius: 6px;
+  border: 1px solid #28a745;
+}
+
+/* Hide leaderboard and menu until score is saved */
+.screen-gameover .screen-subtitle,
+.screen-gameover .highscore-container,
+.screen-gameover .menu-list {
+  display: none;
+}
+.screen-gameover[score-saved] .screen-subtitle,
+.screen-gameover[score-saved] .highscore-container,
+.screen-gameover[score-saved] .menu-list {
+  display: block;
+}
+
+/* Highscore-Überschrift */
+.screen-subtitle {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #ffcf8a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Leaderboard Container */
+.highscore-container {
+  width: 100%;
+  min-height: 120px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Highscore-Liste */
+.highscore-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #ffffff;
+  width: 100%;
+}
+
+/* Enhanced highscore entry */
+.highscore-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px;
+  /* min-width removed to prevent forced horizontal scroll */
+  background: rgba(21, 24, 28, 0.85);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 138, 31, 0.4);
+}
+
+.highscore-entry:nth-child(1) {
+  background: rgba(255, 215, 0, 0.15); /* Gold */
+  border-color: #ffd700;
+}
+
+.highscore-entry:nth-child(2) {
+  background: rgba(192, 192, 192, 0.15); /* Silver */
+  border-color: #c0c0c0;
+}
+
+.highscore-entry:nth-child(3) {
+  background: rgba(205, 127, 50, 0.15); /* Bronze */
+  border-color: #cd7f32;
+}
+
+.rank {
+  font-weight: bold;
+  min-width: 25px;
+  color: #ff8a1f;
+}
+
+.player-name {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.score {
+  font-weight: bold;
+  color: #ffcf8a;
+}
+
+/* Loading and error states */
+.highscore-loading,
+.highscore-error,
+.no-scores {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 16px;
+}
+
+.highscore-error p {
+  margin: 0 0 8px 0;
+  color: #ff6b6b;
+}
+
+/* Fallback for old li elements */
+.highscore-list li {
+  padding: 3px 12px;
+  min-width: 160px;
+  text-align: center;
+  background: rgba(21, 24, 28, 0.9);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 138, 31, 0.5);
+}
+
+/* Refresh button styling */
+.refresh-btn {
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  user-select: none;
+  color: #ff8a1f;
+  /* Reset button styling */
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+
+.refresh-btn:hover {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+/* Buttons unten drunter */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.menu-btn {
+  min-width: 200px;
+  height: 48px;
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: 2px solid #ff8a1f;
+  background-color: #2a3036;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.menu-btn:hover {
+  background-color: #ff8a1f;
+  color: #1f2327;
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(255, 140, 0, 0.7);
+}
+
+/* Highlight for keyboard-selected or focused menu button */
+.menu-btn:focus,
+.menu-btn.selected {
+  background-color: #ff8a1f !important;
+  color: #1f2327 !important;
+  outline: 3px solid #fff;
+  box-shadow: 0 0 16px 4px #ff8a1f99;
+  z-index: 2;
+}

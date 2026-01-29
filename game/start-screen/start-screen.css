@@ -1,0 +1,203 @@
+/* Strong highlight for selected menu button (keyboard or mouse) */
+.menu-btn.selected {
+  background-color: #ff8a1f !important;
+  color: #1f2327 !important;
+  outline: 3px solid #fff;
+  box-shadow: 0 0 16px 4px #ff8a1f99;
+  z-index: 2;
+}
+/* Highlight for keyboard-selected menu button */
+.menu-btn.selected, .menu-btn:focus {
+  background-color: #ff8a1f;
+  color: #1f2327;
+  outline: 2px solid #fff;
+  box-shadow: 0 0 14px rgba(255, 140, 0, 0.8);
+}
+:host {
+  /* füllt den Monitor, aber ohne dunklen Overlay-Hintergrund */
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Karte im IFM-Stil */
+.screen.screen-menu {
+  min-width: 420px;
+  padding: 24px 40px 28px;
+  background-color: #262a30;
+  border-radius: 6px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 138, 31, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Titel im IFM-Orange */
+.screen-title {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #ff8a1f;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Menü-Liste für Buttons */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* FETTE, GROSSE Buttons im IFM-Stil */
+.menu-btn {
+  min-width: 260px;
+  height: 52px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 2px solid #ff8a1f;
+  background-color: #2a3036;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.menu-btn:hover {
+  background-color: #ff8a1f;
+  color: #1f2327;
+  transform: translateY(-1px);
+  box-shadow: 0 0 14px rgba(255, 140, 0, 0.8);
+}
+
+/* Highscore-Bereich unten drunter */
+.screen-subtitle {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #ffcf8a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Leaderboard Container */
+.highscore-container {
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.highscore-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #ffffff;
+  width: 100%;
+}
+
+/* Enhanced highscore entry */
+.highscore-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 12px;
+  min-width: 200px;
+  background: rgba(21, 24, 28, 0.85);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 138, 31, 0.4);
+}
+
+.highscore-entry:nth-child(1) {
+  background: rgba(255, 215, 0, 0.15); /* Gold */
+  border-color: #ffd700;
+}
+
+.highscore-entry:nth-child(2) {
+  background: rgba(192, 192, 192, 0.15); /* Silver */  
+  border-color: #c0c0c0;
+}
+
+.highscore-entry:nth-child(3) {
+  background: rgba(205, 127, 50, 0.15); /* Bronze */
+  border-color: #cd7f32;
+}
+
+.rank {
+  font-weight: bold;
+  min-width: 25px;
+  color: #ff8a1f;
+}
+
+.player-name {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.score {
+  font-weight: bold;
+  color: #ffcf8a;
+}
+
+/* Loading and error states */
+.highscore-loading, .highscore-error, .no-scores {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 16px;
+}
+
+.highscore-error p {
+  margin: 0 0 8px 0;
+  color: #ff6b6b;
+}
+
+/* Fallback for old li elements */
+.highscore-list li {
+  padding: 2px 10px;
+  min-width: 160px;
+  text-align: center;
+  background: rgba(21, 24, 28, 0.85);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 138, 31, 0.4);
+}
+
+/* Refresh button styling */
+.refresh-btn {
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+  user-select: none;
+  color: #ff8a1f;
+  /* Reset button styling */
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+
+.refresh-btn:hover {
+  opacity: 1;
+  transform: rotate(180deg);
+}

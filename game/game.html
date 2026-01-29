@@ -1,0 +1,145 @@
+<div class="game-root">
+  <div class="global-top-bar">
+    <div class="gtb-left">
+      <img class="gtb-icon" src="/assets/images/User.PNG" alt="User" />
+      <img class="gtb-icon home" src="/assets/images/Home.PNG" alt="Home" />
+      <img class="gtb-logo" src="/assets/images/ifm-logo-2.PNG" alt="ifm" />
+      <span class="gtb-title">ifm moneo</span>
+    </div>
+    <div class="gtb-right">
+      <img class="gtb-icon questions" src="/assets/images/Questions.PNG" alt="Questions" />
+      <img class="gtb-icon" src="/assets/images/Alert.PNG" alt="Account" />
+      <img class="gtb-icon" src="/assets/images/warning.PNG" alt="Warning" />
+      <img class="gtb-icon" src="/assets/images/Info.PNG" alt="Info" />
+    </div>
+  </div>
+
+  <header class="top-bar">
+    <div class="top-left">
+      <button class="back-button" (click)="backToMenu()">&lt; BACK</button>
+      <span class="lm-label">LIVE MONITORING:</span>
+    </div>
+    <div class="score-container">
+      <div class="score-frame">
+        <div class="score-title">SCORE</div>
+        <div class="score-value">{{ formattedScore }}</div>
+        <div class="score-hearts">
+          <span *ngFor="let _ of getLivesArray()" class="heart-icon"></span>
+        </div>
+        <div class="dots-left"><div class="dot" *ngFor="let _ of dots"></div></div>
+        <div class="dots-right"><div class="dot" *ngFor="let _ of dots"></div></div>
+      </div>
+    </div>
+    <div class="top-spacer"></div>
+  </header>
+
+  <main class="game-area">
+    <div
+      class="monitor-frame"
+      [class.is-paused]="gameState === 'paused' || gameState === 'gameover' || gameState === 'menu'"
+    >
+      <app-start-screen
+        *ngIf="gameState === 'menu'"
+        [activeSelection]="menuSelection"
+        (start)="startSingleFromMenu()"
+        (twoPlayer)="startTwoPlayerFromMenu()"
+      >
+      </app-start-screen>
+
+      <app-help-screen *ngIf="gameState === 'help'" (confirm)="onHelpConfirmed()">
+      </app-help-screen>
+
+      <div class="game-scene" *ngIf="showGameScene">
+        <div class="chart-header">
+          <div class="chart-hearts">
+            <span *ngFor="let _ of getLivesArray()" class="heart-center"></span>
+          </div>
+          <div class="mode-badge" *ngIf="isTwoPlayer">2 PLAYER MODE</div>
+        </div>
+
+        <div class="chart-area">
+          <div class="y-axis">
+            <div>300µ m/s</div>
+            <div>250µ m/s</div>
+            <div>200µ m/s</div>
+            <div>150µ m/s</div>
+            <div>100µ m/s</div>
+          </div>
+          <div class="chart-window">
+            <canvas
+              #gameLayer
+              class="game-canvas"
+              [width]="CANVAS_WIDTH"
+              [height]="CANVAS_HEIGHT"
+            ></canvas>
+            <div class="overlay-layer">
+              <div
+                class="item"
+                *ngFor="let item of items; trackBy: trackByFn"
+                [style.transform]="'translate3d(' + item.x + 'px,' + item.y + 'px,0) scale(1.3)'"
+                [style.width.px]="item.width"
+                [style.height.px]="item.height"
+              >
+                <img
+                  [src]="item.image"
+                  style="width: 100%; height: 100%; object-fit: contain"
+                  draggable="false"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="x-axis-container">
+          <div class="x-axis" [style.transform]="'translateX(-' + xAxisOffset + 'px)'">
+            <div *ngFor="let t of xTimes" class="x-label-wrapper">
+              <div class="x-label">{{ t }}</div>
+            </div>
+          </div>
+        </div>
+        <app-item-bar></app-item-bar>
+      </div>
+
+      <app-pause-screen
+        *ngIf="gameState === 'paused'"
+        [activeSelection]="menuSelection"
+        (resume)="resumeGame()"
+        (restart)="restartGame()"
+        (backToMenu)="backToMenu()"
+      >
+      </app-pause-screen>
+
+      <ng-container *ngIf="gameState === 'gameover'">
+        <div *ngIf="isNewHighscore" class="overlay-screen gameover-overlay">
+          <h1 style="color: #00ffff">NEW HIGHSCORE!</h1>
+          <div class="name-input-area">
+            <span class="name-char" [class.active-char]="nameCharIndex === 0">{{
+              nameChars[0]
+            }}</span>
+            <span class="name-char" [class.active-char]="nameCharIndex === 1">{{
+              nameChars[1]
+            }}</span>
+            <span class="name-char" [class.active-char]="nameCharIndex === 2">{{
+              nameChars[2]
+            }}</span>
+          </div>
+          <p>PRESS A TO CONFIRM</p>
+        </div>
+
+        <app-gameover-screen
+          *ngIf="!isNewHighscore"
+          [score]="score"
+          [highScores]="highScores"
+          [activeSelection]="menuSelection"
+          (restart)="restartGame()"
+          (backToMenu)="backToMenu()"
+        >
+        </app-gameover-screen>
+      </ng-container>
+    </div>
+  </main>
+
+  <footer class="bottom-bar">
+    <img src="/assets/images/ifm-logo.PNG" class="bottom-logo" alt="Logo" />
+  </footer>
+</div>

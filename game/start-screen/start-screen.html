@@ -1,0 +1,59 @@
+<div class="screen screen-menu">
+  <h2 class="screen-title">IFM Autoscroller</h2>
+
+  <ul class="menu-list">
+    <li>
+      <button
+        #menuBtn
+        class="menu-btn"
+        [class.selected]="selectedIndex === 0"
+        (click)="setSelectedIndex(0); start.emit()"
+        tabindex="0"
+        [attr.aria-selected]="selectedIndex === 0"
+      >
+        Start Game
+      </button>
+    </li>
+    <li>
+      <button
+        #menuBtn
+        class="menu-btn"
+        [class.selected]="selectedIndex === 1"
+        (click)="setSelectedIndex(1); twoPlayer.emit()"
+        tabindex="0"
+        [attr.aria-selected]="selectedIndex === 1"
+      >
+        2 Player
+      </button>
+    </li>
+  </ul>
+
+  <h3 class="screen-subtitle">
+    Leaderboard
+    <button
+      class="refresh-btn"
+      (click)="refreshLeaderboard()"
+      title="Refresh leaderboard"
+      aria-label="Refresh leaderboard"
+      type="button"
+    >
+      ↻
+    </button>
+  </h3>
+  <div class="highscore-container">
+    <div *ngIf="isLoading" class="highscore-loading">Loading scores...</div>
+    <div *ngIf="hasError" class="highscore-error">
+      <p>Could not load online scores. Please check your connection.</p>
+    </div>
+    <ul class="highscore-list" *ngIf="!isLoading && !hasError && highscoreEntries.length > 0">
+      <li *ngFor="let entry of highscoreEntries; let i = index" class="highscore-entry">
+        <span class="rank">{{ i + 1 }}.</span>
+        <span class="player-name">{{ entry.playerName }}</span>
+        <span class="score">{{ entry.score.toString().padStart(4, '0') }}</span>
+      </li>
+    </ul>
+    <div *ngIf="!isLoading && !hasError && highscoreEntries.length === 0" class="no-scores">
+      <p>No Highscores yet - be the first!</p>
+    </div>
+  </div>
+</div>

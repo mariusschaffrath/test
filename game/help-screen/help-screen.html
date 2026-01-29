@@ -1,0 +1,100 @@
+<div class="help-overlay">
+  <div class="help-panel">
+    <h2>TUTORIAL</h2>
+
+    <!-- ───── Steuerung ───── -->
+    <section class="controls">
+      <div class="controls-grid">
+        <!-- LEFT: Single Player -->
+        <div class="controls-col">
+          <h4>CONTROL</h4>
+
+          <div class="control-row">
+            <img src="assets/images/joystick.PNG" alt="Joystick" />
+            <span>JOYSTICK LEFT / RIGHT → MOVEMENT</span>
+          </div>
+
+          <div class="control-row">
+            <img src="assets/images/Button.PNG" alt="Button A" />
+            <span>BUTTON A → JUMP</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Two Player -->
+        <div class="controls-col">
+          <h4>CONTROL (2 PLAYER)</h4>
+
+          <div class="control-row">
+            <img src="assets/images/joystick.PNG" alt="Joystick" />
+            <span>PLAYER 1: JOYSTICK LEFT / RIGHT → MOVEMENT</span>
+          </div>
+
+          <div class="control-row">
+            <img src="assets/images/Button-Blau.png" alt="Button A (blau)" />
+            <span>PLAYER 2: BUTTON A → JUMP</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───── Items Grid ───── -->
+    <section class="items">
+      <h3>ITEMS & OBSTACLES</h3>
+
+      <div class="item-grid">
+        <div class="item-card">
+          <img src="assets/images/Item-Herz.PNG" />
+          <span>+1 LIFE</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/Item-Schraube.PNG" />
+          <span>50 POINTS</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/Item-Zahnrad.PNG" />
+          <span>100 POINTS</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/Item-Batterie.PNG" />
+          <span>150 POINTS</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/Item-Timer.PNG" />
+          <span>SLOWMOTION (10 sec)</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/Item-Scanner.PNG" />
+          <span>SHIELD (10 sec)</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/Item-Antenne.PNG" />
+          <span>DOUBLE POINTS (10 sec)</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/Item-Box.PNG" />
+          <span>+1 LIFE & DOUBLE POINTS (10 sec)</span>
+        </div>
+
+        <!-- ⚡ TURBO -->
+        <div class="item-card">
+          <img src="assets/images/Item-Blitz.PNG" />
+          <span>TURBO (10 sec)</span>
+        </div>
+
+        <div class="item-card">
+          <img src="assets/images/hazard_boden.png" />
+          <span>OBSTACLE: DON’T TOUCH!</span>
+        </div>
+      </div>
+    </section>
+
+    <button #confirmBtn class="confirm" (click)="onConfirm()">UNDERSTOOD · PRESS START</button>
+  </div>
+</div>
